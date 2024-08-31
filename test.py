@@ -6,13 +6,30 @@ from PIL import ImageGrab
 from TetrisBoard import TetrisBoard
 import pyautogui # somehow the mouse get_position doesn't work
 
-x1_board, y1_board = 1341,375 # top left of board
-x2_board, y2_board = 1512,715 # bottom right of board
-x1, y1 = 1564,418
+#x1_board, y1_board = 1341,375 # top left of board
+#x2_board, y2_board = 1512,715 # bottom right of board
+#x1, y1 = 1564,418
 x2, y2 = 0, 0
 x3, y3 = 0, 0
 x4, y4 = 0, 0
-x5, y5 = 1565,622
+#x5, y5 = 1565,622
+
+#check current screen size
+print(pyautogui.size())
+
+if pyautogui.size() == (1920, 1080):
+    x1_board, y1_board = 710,117 # top left of board
+    x2_board, y2_board = 1146,990 # bottom right of board
+    x1, y1 = 1294,242
+    x5, y5 = 1300,761
+    print("1920x1080")
+else:
+    x1_board, y1_board = 1341,375 # top left of board
+    x2_board, y2_board = 1512,715 # bottom right of board
+    x1, y1 = 1564,418
+    x5, y5 = 1565,622
+
+
 
 
 pixel_area = 30 # number of pixels to check for color - auto
@@ -27,13 +44,13 @@ drop_key = 'space'
 # constants - ARR 0ms - DAS 40ms
 calculation_accuracy = 5 # number of best moves to keep at each depth - higher number means more accurate but slower
 max_depth = 6 # number of moves into the future to simulate, max is 6, you can only see 6 blocks at once - higher number means more accurate but slower
-wait_time = 0.04 # time to wait, can't go too low because you need to wait for screen to refresh
+wait_time = 0.07 # time to wait, can't go too low because you need to wait for screen to refresh
 scan_board = True # some modes require scanning the board because of extra pieces - zen, multiplayer
 jstris = False # jstris mode - changes colors
 
 # Game Settings - DAS 40ms, ARR 0ms
 
-key_delay = 0
+key_delay = 0.06
 
 # Colors for tetrio
 colors = [
