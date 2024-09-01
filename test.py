@@ -371,7 +371,7 @@ def key_press(best_position, best_rotation):
             if key_delay > 0:
                 time.sleep(key_delay)
     # press space to drop piece
-    time.sleep(key_delay*1000)
+    time.sleep(0.2)
     keyboard.press('space')
     keyboard.release('space')
     if key_delay > 0:
