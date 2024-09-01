@@ -368,11 +368,21 @@ def key_press(best_position, best_rotation):
         
         # Simulate a human-like mistake and correction
         if random.random() < 0.1:  # 10% chance of making a mistake
-            keyboard.press(move_right_key)  # Accidentally press right
-            keyboard.release(move_right_key)
-            time.sleep(0.1)  # Brief pause
-            keyboard.press(move_left_key)  # Correct the mistake
-            keyboard.release(move_left_key)
+            if best_position[1] == 0:  # Leftmost position
+                mistake_direction = move_right_key
+                correction_direction = move_left_key
+            elif best_position[1] == 9:  # Rightmost position (assuming 10 columns)
+                mistake_direction = move_left_key
+                correction_direction = move_right_key
+            else:
+                mistake_direction = random.choice([move_left_key, move_right_key])
+                correction_direction = move_right_key if mistake_direction == move_left_key else move_left_key
+            
+            keyboard.press(mistake_direction)
+            keyboard.release(mistake_direction)
+            time.sleep(random.uniform(0, 0.4))
+            keyboard.press(correction_direction)
+            keyboard.release(correction_direction)
             if key_delay > 0:
                 time.sleep(key_delay)
     elif best_position[1] > 3:
@@ -384,11 +394,21 @@ def key_press(best_position, best_rotation):
         
         # Simulate a human-like mistake and correction
         if random.random() < 0.1:  # 10% chance of making a mistake
-            keyboard.press(move_left_key)  # Accidentally press left
-            keyboard.release(move_left_key)
-            time.sleep(0.1)  # Brief pause
-            keyboard.press(move_right_key)  # Correct the mistake
-            keyboard.release(move_right_key)
+            if best_position[1] == 0:  # Leftmost position
+                mistake_direction = move_right_key
+                correction_direction = move_left_key
+            elif best_position[1] == 9:  # Rightmost position (assuming 10 columns)
+                mistake_direction = move_left_key
+                correction_direction = move_right_key
+            else:
+                mistake_direction = random.choice([move_left_key, move_right_key])
+                correction_direction = move_right_key if mistake_direction == move_left_key else move_left_key
+            
+            keyboard.press(mistake_direction)
+            keyboard.release(mistake_direction)
+            time.sleep(random.uniform(0, 0.4))
+            keyboard.press(correction_direction)
+            keyboard.release(correction_direction)
             if key_delay > 0:
                 time.sleep(key_delay)
     # press space to drop piece
