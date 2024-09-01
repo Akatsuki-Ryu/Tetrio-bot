@@ -235,7 +235,7 @@ def find_best_position(board, block_array, depth):
                             return_position_rotations_array = position_rotations_array[index]
 
                     # Check for T-spin
-                    is_t_spin = block == tetris_pieces['T'] and is_t_spin_setup(board, position)
+                    is_t_spin = np.array_equal(block, tetris_pieces['T']) and is_t_spin_setup(board, position)
                     
                     # Evaluate board score
                     score = evaluate_board(new_board)
