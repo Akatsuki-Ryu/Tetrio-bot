@@ -343,6 +343,7 @@ piece_array = []
 def key_press(best_position, best_rotation):
     # rotate
     print("best rotation: " + str(best_rotation))
+    print("best position: " + str(best_position))
     if best_rotation == 1:
         keyboard.press(rotate_clockwise_key)
         keyboard.release(rotate_clockwise_key)
