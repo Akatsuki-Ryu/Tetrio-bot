@@ -365,9 +365,29 @@ def key_press(best_position, best_rotation):
             keyboard.release(move_left_key)
             if key_delay > 0:
                 time.sleep(key_delay)
+        
+        # Simulate a human-like mistake and correction
+        if random.random() < 0.1:  # 10% chance of making a mistake
+            keyboard.press(move_right_key)  # Accidentally press right
+            keyboard.release(move_right_key)
+            time.sleep(0.1)  # Brief pause
+            keyboard.press(move_left_key)  # Correct the mistake
+            keyboard.release(move_left_key)
+            if key_delay > 0:
+                time.sleep(key_delay)
     elif best_position[1] > 3:
         for i in range(best_position[1] - 3):
             keyboard.press(move_right_key)
+            keyboard.release(move_right_key)
+            if key_delay > 0:
+                time.sleep(key_delay)
+        
+        # Simulate a human-like mistake and correction
+        if random.random() < 0.1:  # 10% chance of making a mistake
+            keyboard.press(move_left_key)  # Accidentally press left
+            keyboard.release(move_left_key)
+            time.sleep(0.1)  # Brief pause
+            keyboard.press(move_right_key)  # Correct the mistake
             keyboard.release(move_right_key)
             if key_delay > 0:
                 time.sleep(key_delay)
