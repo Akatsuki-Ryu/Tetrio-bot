@@ -360,7 +360,7 @@ def key_press(best_position, best_rotation):
         if key_delay > 0:
             time.sleep(key_delay)
     # press left arrow or right arrow to move to position
-    if best_position[1] < 3:
+    if best_position[1] < 3: #intend to move left
         for i in range(3 - best_position[1]):
             keyboard.press(move_left_key)
             keyboard.release(move_left_key)
@@ -373,12 +373,13 @@ def key_press(best_position, best_rotation):
             if best_position[1] <= 0:  # Leftmost or second-from-left position
                 mistake_direction = move_right_key
                 correction_direction = move_left_key
-            elif best_position[1] >= 6:  # Rightmost or second-from-right position
-                mistake_direction = move_left_key
-                correction_direction = move_right_key
             else:
                 mistake_direction = random.choice([move_left_key, move_right_key])
                 correction_direction = move_right_key if mistake_direction == move_left_key else move_left_key
+            
+            # Add a small delay only if the mistake is not the same direction as the intended direction
+            if mistake_direction != move_left_key:
+                time.sleep(random.uniform(0.05, 0.15))
             
             keyboard.press(mistake_direction)
             keyboard.release(mistake_direction)
@@ -387,7 +388,7 @@ def key_press(best_position, best_rotation):
             keyboard.release(correction_direction)
             if key_delay > 0:
                 time.sleep(key_delay)
-    elif best_position[1] > 3:
+    elif best_position[1] > 3: #intend to move right
         for i in range(best_position[1] - 3):
             keyboard.press(move_right_key)
             keyboard.release(move_right_key)
@@ -397,15 +398,16 @@ def key_press(best_position, best_rotation):
         
         # Simulate a human-like mistake and correction
         if random.random() < 1:  # 10% chance of making a mistake
-            if best_position[1] <= 0:  # Leftmost or second-from-left position
-                mistake_direction = move_right_key
-                correction_direction = move_left_key
-            elif best_position[1] >= 6:  # Rightmost or second-from-right position
+            if best_position[1] >= 6:  # Rightmost or second-from-right position
                 mistake_direction = move_left_key
                 correction_direction = move_right_key
             else:
                 mistake_direction = random.choice([move_left_key, move_right_key])
                 correction_direction = move_right_key if mistake_direction == move_left_key else move_left_key
+            
+            # Add a small delay only if the mistake is not the same direction as the intended direction
+            if mistake_direction != move_right_key:
+                time.sleep(random.uniform(0.05, 0.15))
             
             keyboard.press(mistake_direction)
             keyboard.release(mistake_direction)
