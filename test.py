@@ -340,41 +340,31 @@ board_initialized = False
 piece_array = []
 
 def key_press(best_position, best_rotation):
-    # rotate
     print("best rotation: " + str(best_rotation))
-    if best_rotation == 1:
-        keyboard.press(rotate_clockwise_key)
-        keyboard.release(rotate_clockwise_key)
-        if key_delay > 0:
-            time.sleep(key_delay)
-    elif best_rotation == 2:
-        keyboard.press(rotate_180_key)
-        keyboard.release(rotate_180_key)
-        if key_delay > 0:
-            time.sleep(key_delay)
-    elif best_rotation == 3:
-        keyboard.press(rotate_counterclockwise_key)
-        keyboard.release(rotate_counterclockwise_key)
-        if key_delay > 0:
-            time.sleep(key_delay)
-    # press left arrow or right arrow to move to position
-    if best_position[1] < 3:
-        for i in range(3 - best_position[1]):
-            keyboard.press(move_left_key)
-            keyboard.release(move_left_key)
-            if key_delay > 0:
-                time.sleep(key_delay)
-    elif best_position[1] > 3:
-        for i in range(best_position[1] - 3):
-            keyboard.press(move_right_key)
-            keyboard.release(move_right_key)
-            if key_delay > 0:
-                time.sleep(key_delay)
-    # press space to drop piece
+    
+    # Rotate
+    if best_rotation > 0:
+        rotate_key = rotate_clockwise_key if best_rotation == 1 else rotate_180_key if best_rotation == 2 else rotate_counterclockwise_key
+        keyboard.press(rotate_key)
+        time.sleep(0.05 + random.uniform(0, 0.02))  # Simulate human reaction time
+        keyboard.release(rotate_key)
+        time.sleep(key_delay + random.uniform(0, 0.01))  # Add slight randomness to delay
+
+    # Move horizontally
+    move_key = move_left_key if best_position[1] < 3 else move_right_key
+    moves = abs(best_position[1] - 3)
+    for _ in range(moves):
+        keyboard.press(move_key)
+        time.sleep(0.03 + random.uniform(0, 0.02))  # Simulate human key press duration
+        keyboard.release(move_key)
+        time.sleep(key_delay + random.uniform(0, 0.01))  # Add slight randomness to delay
+
+    # Drop piece
+    time.sleep(0.1 + random.uniform(0, 0.05))  # Slight pause before dropping
     keyboard.press('space')
+    time.sleep(0.05 + random.uniform(0, 0.02))  # Simulate human key press duration
     keyboard.release('space')
-    if key_delay > 0:
-        time.sleep(key_delay)
+    time.sleep(key_delay + random.uniform(0, 0.02))  # Add slight randomness to delay
 
 
 def get_tetris_board_from_screen(top_left_x, top_left_y, bottom_right_x, bottom_right_y):
