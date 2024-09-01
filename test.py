@@ -1,3 +1,4 @@
+import random
 import keyboard
 import time
 import numpy as np
@@ -371,7 +372,7 @@ def key_press(best_position, best_rotation):
             if key_delay > 0:
                 time.sleep(key_delay)
     # press space to drop piece
-    time.sleep(0.2)
+    time.sleep(random.uniform(0, 0.2))
     keyboard.press('space')
     keyboard.release('space')
     if key_delay > 0:
