@@ -368,10 +368,10 @@ def key_press(best_position, best_rotation):
         
         # Simulate a human-like mistake and correction
         if random.random() < 1:  # 10% chance of making a mistake
-            if best_position[1] <= 1:  # Leftmost or second-from-left position
+            if best_position[1] <= 2:  # Leftmost or second-from-left position
                 mistake_direction = move_right_key
                 correction_direction = move_left_key
-            elif best_position[1] >= 8:  # Rightmost or second-from-right position
+            elif best_position[1] >= 4:  # Rightmost or second-from-right position
                 mistake_direction = move_left_key
                 correction_direction = move_right_key
             else:
@@ -394,10 +394,10 @@ def key_press(best_position, best_rotation):
         
         # Simulate a human-like mistake and correction
         if random.random() < 1:  # 10% chance of making a mistake
-            if best_position[1] <= 1:  # Leftmost or second-from-left position
+            if best_position[1] <= 2:  # Leftmost or second-from-left position
                 mistake_direction = move_right_key
                 correction_direction = move_left_key
-            elif best_position[1] >= 8:  # Rightmost or second-from-right position
+            elif best_position[1] >= 4:  # Rightmost or second-from-right position
                 mistake_direction = move_left_key
                 correction_direction = move_right_key
             else:
