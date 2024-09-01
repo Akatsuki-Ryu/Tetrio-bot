@@ -164,6 +164,14 @@ def evaluate_board(board):
 
     A, B, C, D, E = -1, 10, -50, -1, -1
     score = A * weighted_heights + B * num_cleared_rows * num_cleared_rows * num_cleared_rows + C * holes + D * blockades + E * highest_block_row
+
+    # Add T-spin potential to the score
+    t_spin_potential = sum(is_t_spin_setup(board, (x, y)) for x in range(board.shape[1]) for y in range(board.shape[0]))
+    
+    # Increase the weight for T-spin setups
+    T_SPIN_WEIGHT = 100
+    score += T_SPIN_WEIGHT * t_spin_potential
+
     return score
 
 def get_positions(board, rotated_block):
@@ -226,8 +234,16 @@ def find_best_position(board, block_array, depth):
                         else:
                             return_position_rotations_array = position_rotations_array[index]
 
-                    # evaluate board score and add to list
+                    # Check for T-spin
+                    is_t_spin = block == tetris_pieces['T'] and is_t_spin_setup(board, position)
+                    
+                    # Evaluate board score
                     score = evaluate_board(new_board)
+                    
+                    # Bonus for T-spin
+                    if is_t_spin:
+                        score += 1000  # Adjust this value based on how much you want to prioritize T-spins
+                    
                     score_array.append(score)
                     new_board = clear_full_rows(new_board) # clear after evaluation
                     new_boards.append(new_board)
@@ -408,7 +424,12 @@ def get_tetris_board_from_screen(top_left_x, top_left_y, bottom_right_x, bottom_
             break
     return board
 
-
+def is_t_spin_setup(board, position):
+    x, y = position
+    # Check if three corners around the T piece are filled
+    corners = [(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)]
+    filled_corners = sum(1 for cx, cy in corners if 0 <= cx < board.shape[1] and 0 <= cy < board.shape[0] and board[cy][cx] == 1)
+    return filled_corners >= 3
 
 # start program
 while True:
