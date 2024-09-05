@@ -24,11 +24,18 @@ if pyautogui.size() == (1920, 1080):
     x1, y1 = 1294,242
     x5, y5 = 1300,761
     print("1920x1080")
+elif pyautogui.size() == (2560, 1440):
+    x1_board, y1_board = 950,137 # top left of board
+    x2_board, y2_board = 1543,1320 # bottom right of board
+    x1, y1 = 1742,305
+    x5, y5 = 1750,1008
+    print("2560x1440")
 else:
-    x1_board, y1_board = 1341,375 # top left of board
-    x2_board, y2_board = 1512,715 # bottom right of board
-    x1, y1 = 1564,418
-    x5, y5 = 1565,622
+    x1_board, y1_board = 950,137 # top left of board
+    x2_board, y2_board = 1543,1320 # bottom right of board
+    x1, y1 = 1752,300
+    x5, y5 = 1750,1008
+    print("other resolution")
 
 
 
