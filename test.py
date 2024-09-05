@@ -59,6 +59,8 @@ jstris = False # jstris mode - changes colors
 # Game Settings - DAS 40ms, ARR 0ms
 
 key_delay = 0.06
+#this is simulating human reaction time
+operation_delay = 0.05
 
 # Colors for tetrio
 colors = [
@@ -386,11 +388,11 @@ def key_press(best_position, best_rotation):
             
             # Add a small delay only if the mistake is not the same direction as the intended direction
             if mistake_direction != move_left_key:
-                time.sleep(random.uniform(0.05, 0.15))
+                time.sleep(random.uniform(operation_delay, operation_delay * 2))
             
             keyboard.press(mistake_direction)
             keyboard.release(mistake_direction)
-            time.sleep(random.uniform(0, 0.4))
+            time.sleep(random.uniform(operation_delay, operation_delay * 2))
             keyboard.press(correction_direction)
             keyboard.release(correction_direction)
             if key_delay > 0:
@@ -415,17 +417,17 @@ def key_press(best_position, best_rotation):
             
             # Add a small delay only if the mistake is not the same direction as the intended direction
             if mistake_direction != move_right_key:
-                time.sleep(random.uniform(0.05, 0.15))
+                time.sleep(random.uniform(operation_delay, operation_delay * 2))
             
             keyboard.press(mistake_direction)
             keyboard.release(mistake_direction)
-            time.sleep(random.uniform(0, 0.4))
+            time.sleep(random.uniform(operation_delay, operation_delay * 2))
             keyboard.press(correction_direction)
             keyboard.release(correction_direction)
             if key_delay > 0:
                 time.sleep(key_delay)
     # press space to drop piece
-    time.sleep(random.uniform(0, 0.2))
+    time.sleep(random.uniform(0, operation_delay * 2))
     keyboard.press('space')
     keyboard.release('space')
     if key_delay > 0:
